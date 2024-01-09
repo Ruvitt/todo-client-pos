@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Criar
+{% endblock  %}
+
+{% block css %}
+    <style>
+        body {
+            background-color: #5b95cc;
+        }
+
+        .container {
+            background-color: #fff;
+        }
+    </style>
+{% endblock  %}
+
+{% block conteudo %}
+    <div class="container mt-5 p-3 border rounded">
+        <h1 class="text-center">Criar comentario</h1>
+        <hr>
+        <div class="container py-3">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label for="post" class="form-control-label">Postagem</label>
+                    <select name="post" id="post" class="form-control">
+                        {% for post in postsList %}
+                            <option value="{{ post.id }}">{{ post.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="form-control-label">Titulo do comentario</label>
+                    {{ form.name(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-control-label">Email</label>
+                    {{ form.email(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    <label for="body" class="form-control-label">Conteudo do comentario</label>
+                    {{ form.body(class="form-control") }}
+                </div>
+                <div class="form-group mt-3">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>   
+            </form>
+        </div>
+        <hr>
+    </div>
+{% endblock  %}

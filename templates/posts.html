@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Posts
+{% endblock  %}
+
+{% block css %}
+    <style>
+        body {
+            background-color: #5b95cc;
+        }
+
+        .container {
+            background-color: #fff;
+        }
+    </style>
+{% endblock  %}
+
+{% block conteudo %}
+    <div class="container mt-5 p-3 border rounded">
+        <h1 class="text-center">Postagens</h1>
+        <hr>
+        <div class="container py-3">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Titulo da postagem</th>
+                        <th>Descricao</th>
+                        <th>Editar</th>
+                        <th>Deletar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in postsList %}
+                        <tr>
+                            <td>
+                                {% for user in usersList %}
+                                    {% if user.id == post.user %}
+                                        {{ user.name }}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>{{ post.title }}</td>
+                            <td>{{ post.body }}</td>
+                            <td><a class="btn btn-success" href="{{ url_for('updatePost', post_id = post.id)}}">Editar</a></td>
+                            <td><a class="btn btn-danger" href="{{ url_for('deletePost', post_id = post.id)}}">Deletar</a></td>
+                        </tr>
+                    {% endfor %}	
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-center mt-3 gap-3">
+                <a class="btn btn-primary mt-3" href="{{ url_for('createPost')}}">Criar postagem</a>
+                <a class="btn btn-info mt-3" href="{{ url_for('index')}}">Voltar</a>
+            </div>
+        </div>
+        <hr>
+    </div>
+{% endblock  %}

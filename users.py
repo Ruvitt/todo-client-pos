@@ -3,7 +3,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, EmailField
 
 class Users:
-
     base_url = "http://127.0.0.1:8000/users/"
 
     class UserForm(FlaskForm):

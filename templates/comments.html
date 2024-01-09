@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Comments
+{% endblock  %}
+
+{% block css %}
+    <style>
+        body {
+            background-color: #5b95cc;
+        }
+
+        .container {
+            background-color: #fff;
+        }
+    </style>
+{% endblock  %}
+
+{% block conteudo %}
+    <div class="container mt-5 p-3 border rounded">
+        <h1 class="text-center">Comentarios</h1>
+        <hr>
+        <div class="container py-3">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Postagem</th>
+                        <th>Titulo do comentario</th>
+                        <th>email do usuario</th>
+                        <th>Comentario</th>
+                        <th>Editar</th>
+                        <th>Deletar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comment in commentsList %}
+                        <tr>
+                            <td>
+                                {% for post in postsList %}
+                                    {% if post.id == comment.post %}
+                                        {{ post.title }}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>{{ comment.name }}</td>
+                            <td>{{ comment.email }}</td>
+                            <td>{{ comment.body }}</td>
+                            <td><a class="btn btn-success" href="{{ url_for('updateComment', comment_id = comment.id)}}">Editar</a></td>
+                            <td><a class="btn btn-danger" href="{{ url_for('deleteComment', comment_id = comment.id)}}">Deletar</a></td>
+                        </tr>
+                    {% endfor %}                    
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-center mt-3 gap-3">
+                <a class="btn btn-primary mt-3" href="{{ url_for('createComment')}}">Criar comentario</a>
+                <a class="btn btn-info mt-3" href="{{ url_for('index')}}">Voltar</a>
+            </div>
+        </div>
+        <hr>
+    </div>
+{% endblock  %}

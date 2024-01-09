@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Criar
+{% endblock  %}
+
+{% block css %}
+    <style>
+        body {
+            background-color: #5b95cc;
+        }
+
+        .container {
+            background-color: #fff;
+        }
+    </style>
+{% endblock  %}
+
+{% block conteudo %}
+    <div class="container mt-5 p-3 border rounded">
+        <h1 class="text-center">Criar postagem</h1>
+        <hr>
+        <div class="container py-3">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label for="user" class="form-control-label">Usuario</label>
+                    <select id="user" name="user" class="form-control">
+                        {% for user in users %}
+                            <option value="{{ user.id }}">{{ user.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="form-control-label">Titulo</label>
+                    {{ form.title(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    <label for="body" class="form-control-label">Conteudo</label>
+                    {{ form.body(class="form-control") }}
+                </div>
+                <div class="form-group mt-3">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>   
+            </form>
+        </div>
+        <hr>
+    </div>
+{% endblock  %}
